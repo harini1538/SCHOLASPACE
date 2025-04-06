@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<style type='text/css'>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #072055; /* New background color for the entire body */
+        margin-top: 40px;
+        height: 100vh; /* Ensure the body takes full height */
+        color: white; /* Ensure text is readable on the dark background */
+    }
+
+    table {
+        border: 1px;
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 86%;
+        margin: auto;
+    }
+
+    td,
+    th {
+        border: 1px solid #072055 !important;
+        padding: 5px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dceeff;
+    }
+
+    h1, h2 {
+        background-color: #0f6cbe;
+        color: white;
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .text-center h1 {
+        color: #072055;
+        font-size: 44px;
+        background: transparent;
+    }
+
+    button {
+        background-color: #0f6cbe;
+        color: white;
+    }
+
+    button:hover {
+        background-color: #3ea6f2;
+    }
+
+    input {
+        border: 2px solid #0f6cbe;
+        border-radius: 5px;
+        padding: 5px;
+        width: 80%;
+    }
+
+    .col {
+        background-color: rgba(7, 32, 85, 0.1);
+        border-radius: 20px;
+    }
+
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>Face Recognition Based Attendance System</title>
+</head>
+
+<body>
+
+    <div class='mt-3 text-center'>
+        <h1>Face Recognition Based Attendance System</h1>
+    </div>
+
+    {% if mess %}
+    <p class="text-center" style="color: red;font-size: 20px;">{{ mess }}</p>
+    {% endif %}
+
+    <div class="row text-center" style="padding: 20px;margin: 20px;">
+
+        <div class="col"
+            style="padding: 0px;margin:0px 10px 10px 10px;min-height: 400px;">
+            <h2>Today's Attendance <i class="material-icons">assignment</i></h2>
+            <a style="text-decoration: none;max-width: 300px;" href="/start">
+                <button
+                    style="font-size: 24px;font-weight: bold;border-radius: 10px;width:490px;padding: 10px;margin-top: 30px;margin-bottom: 30px;"
+                    type='submit' class='btn'>Take Attendance <i
+                        class="material-icons">beenhere</i></button>
+            </a>
+            <table style="background-color: white;">
+                <tr style="background-color: #3ea6f2; color: white;">
+                    <td><b>S No</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>ID</b></td>
+                    <td><b>Time</b></td>
+                </tr>
+                {% if l %}
+                {% for i in range(l) %}
+                <tr>
+                    <td>{{ i+1 }}</td>
+                    <td>{{ names[i] }}</td>
+                    <td>{{ rolls[i] }}</td>
+                    <td>{{ times[i] }}</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+
+        <div class="col" style="margin:0px 10px 10px 10px;height: 400px;">
+            <form action='/add' method="POST" enctype="multipart/form-data">
+                <h2>Add New User <i class="material-icons">control_point_duplicate</i></h2>
+                <label style="font-size: 20px;"><b>Enter New User Name*</b></label>
+                <br>
+                <input type="text" id="newusername" name='newusername'
+                    style="font-size: 20px;margin-top:10px;margin-bottom:10px;" required>
+                <br>
+                <label style="font-size: 20px;"><b>Enter New User Id*</b></label>
+                <br>
+                <input type="number" id="newusereid" name='newuserid'
+                    style="font-size: 20px;margin-top:10px;margin-bottom:10px;" required>
+                <br>
+                <button style="width: 232px;margin-top: 20px;font-size: 20px;" type='submit' class='btn'>Add
+                    New User</button>
+                <br>
+                <h5 style="padding: 25px;"><i>Total Users in Database: {{totalreg}}</i></h5>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

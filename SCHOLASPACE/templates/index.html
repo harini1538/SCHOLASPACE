@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SCHOLASPACE</title>
+  <style>
+    /* Base Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0b0c3f;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #0c1249;
+    }
+
+    .logo {
+      color: #ffffff;
+      font-size: 24px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+    }
+
+    .nav-links li {
+      margin: 0 15px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
+    }
+
+    .nav-links a:hover {
+      color: #59cfff;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form h2 {
+      color: #3fa9f5;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-form button {
+      background-color: #3fa9f5;
+      color: #ffffff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .contact-form button:hover {
+      background-color: #278dc8;
+    }
+
+    .banner-image {
+      width: 100%;
+      max-width: 1920px;
+      height: auto;
+      display: block;
+    }
+
+    .about-us {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #1c234f;
+      border-radius: 10px;
+      color: #ffffff;
+      flex-wrap: wrap;
+      max-width: 1800px;
+    }
+
+    .about-text {
+      flex: 1;
+      padding-right: 20px;
+    }
+
+    .about-text h1 {
+      font-size: 33px;
+      color: #59cfff;
+    }
+
+    .about-text p {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .carousel {
+      width: 600px;
+      height: 450px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    .carousel-images img {
+      width: 600px;
+      height: 450px;
+      border-radius: 10px;
+    }
+
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel-button {
+      background-color: rgba(63, 169, 245, 0.8);
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .carousel-button:hover {
+      background-color: #2b99e5;
+    }
+
+    .container-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px;
+    }
+
+    .features-title {
+      font-size: 35px;
+      color: #3fa9f5;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      width: 30%;
+      background-color: #1a235a;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .container img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .container:hover img {
+      transform: translateY(-10px);
+    }
+
+    .details {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .container:hover .details {
+      display: block;
+    }
+
+    .container h3 {
+      font-size: 24px;
+      color: #59cfff;
+      margin: 20px 0 10px;
+    }
+
+    .container p {
+      font-size: 16px;
+    }
+
+    .details-button {
+      background-color: #3fa9f5;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      display: none;
+    }
+
+    .container:hover .details-button {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #0c1249;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 30px 0;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-icon {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-icon .bar {
+        height: 3px;
+        width: 25px;
+        background-color: #fff;
+        margin: 5px 0;
+      }
+
+      .about-us {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .carousel {
+        width: 100%;
+        height: 300px;
+      }
+
+      .container {
+        width: 90%;
+      }
+
+      .contact-form {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Scholaspace</div>
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#contact-form">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="banner-container">
+    <img src="static/images/MAIN.jpg" alt="Banner Image" class="banner-image">
+  </div>
+
+  <div class="about-us" id="about">
+    <div class="about-text">
+      <h1>About Us</h1>
+      <p>Scholaspace is an AI-powered platform designed to revolutionize rural education by offering personalized learning experiences for kids, students, and teachers...</p>
+    </div>
+    <div class="carousel">
+      <div class="carousel-images">
+        <img src="static/images/abourt.jpg" alt="Slide 1" />
+        <!-- <img src="static/images/kids.JPG" alt="Slide 2" />
+        <img src="static/images/stue.jpg" alt="Slide 3" /> -->
+      </div>
+      <div class="carousel-buttons">
+        <button class="carousel-button" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-button" onclick="nextSlide()">&#10095;</button>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="features-title" id="features">Our Features</div>
+    <div class="container-section">
+      <div class="container">
+        <img src="static/images/kids.JPG" alt="Feature 1">
+        <h3>NOTES</h3>
+        <p>A World of Fun Awaits!</p>
+        <div class="details">
+          <button class="details-button" onclick="navigateTo('/rhyme')">Learn More</button>
+        </div>
+      </div>
+      <div class="container">
+        <img src="static/images/stue.jpg" alt="Feature 2">
+        <h3>STUDENTS</h3>
+        <p>Explore, Engage, Excel!</p>
+        <div class="details">
+          <button class="details-button" onclick="navigateTo('/student')">Learn More</button>
+        </div>
+      </div>
+      <div class="container">
+        <img src="static/images/teache.jpg" alt="Feature 3">
+        <h3>TEACHERS</h3>
+        <p>Inspire, Educate, Transform</p>
+        <div class="details">
+          <button class="details-button" onclick="navigateTo('/teachers')">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="contact-form" id="contact-form">
+      <h2>Contact Us</h2>
+      <form action="#" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    let currentSlide = 0;
+
+    function nextSlide() {
+      const slides = document.querySelectorAll('.carousel-images img');
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlide();
+    }
+
+    function prevSlide() {
+      const slides = document.querySelectorAll('.carousel-images img');
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlide();
+    }
+
+    function updateSlide() {
+      const offset = -currentSlide * 600;
+      document.querySelector('.carousel-images').style.transform = `translateX(${offset}px)`;
+    }
+
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    function navigateTo(page) {
+      window.location.href = page;
+    }
+  </script>
+</body>
+</html>

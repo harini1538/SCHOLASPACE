@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Video Meeting</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #a5d5f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #072055;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(7, 32, 85, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 26px;
+            color: #072055;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #0f6cbe;
+        }
+
+        .meeting-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .meeting-list li {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #e8f4fd;
+            color: #072055;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .meeting-list li:hover {
+            background-color: #d0e8fa;
+            color: #072055;
+        }
+
+        .link {
+            color: #0f6cbe;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+            color: #3ea6f2;
+        }
+
+        .btn {
+            background-color: #0f6cbe;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #072055;
+            transform: translateY(-2px);
+        }
+
+        .dashboard {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ first_name }}!</h1>
+        <div class="dashboard">
+            <h2>Your Meetings:</h2>
+            <ul class="meeting-list">
+                {% for meeting in meetings %}
+                    <li>Meeting ID: {{ meeting.room_id }} - 
+                        <a href="{{ url_for('meet.meeting', room_id=meeting.room_id) }}" class="link">Join Meeting</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <form action="{{ url_for('meet.create_meeting') }}" method="POST">
+                <button type="submit" class="btn">Create New Meeting</button>
+            </form>
+            <form action="{{ url_for('meet.join') }}" method="GET" style="margin-top: 10px;">
+                <button type="submit" class="btn">Join an Existing Meeting</button>
+            </form>
+            <form action="{{ url_for('meet.logout') }}" method="POST" style="margin-top: 10px;">
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

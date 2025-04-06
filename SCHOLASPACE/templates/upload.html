@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Note</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-[Inter] bg-gradient-to-br from-slate-900 to-blue-900 min-h-screen">
+    <div class="relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-0 -left-4 w-72 h-72 bg-emerald-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+            <div class="absolute top-0 -right-4 w-72 h-72 bg-teal-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-8 left-20 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="relative z-10">
+            <div class="container mx-auto px-4 py-12 max-w-2xl">
+                <h1 class="text-4xl font-bold text-white text-center mb-8 animate-fade-in">Update Note</h1>
+
+                <!-- ✅ FORM STARTS HERE -->
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="space-y-2">
+                        <label for="subject" class="block text-lg font-medium text-white">Subject:</label>
+                        <input type="text" id="subject" name="subject" value="{{ note.subject if note and note.subject else '' }}" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-cyan-300 focus:border-transparent transition-all duration-300">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="topic" class="block text-lg font-medium text-white">Topic:</label>
+                        <input type="text" id="topic" name="topic" value="{{ note.topic if note and note.topic else '' }}" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-cyan-300 focus:border-transparent transition-all duration-300">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="file" class="block text-lg font-medium text-white">Replace File (optional):</label>
+                        <input type="file" id="file" name="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-cyan-300 focus:border-transparent transition-all duration-300">
+                        {% if note.file %}
+                        <p class="text-sm text-white/60 mt-1">Current file: <span class="underline">{{ note.file }}</span></p>
+                        {% endif %}
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="yt_link" class="block text-lg font-medium text-white">YouTube Link:</label>
+                        <input type="url" id="yt_link" name="yt_link" value="{{ note.yt_link if note and note.yt_link else '' }}" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:ring-2 focus:ring-cyan-300 focus:border-transparent transition-all duration-300">
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-white py-3 px-6 rounded-xl hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 font-semibold text-lg shadow-lg shadow-yellow-500/30">
+                        Update Note
+                    </button>
+                </form>
+                <!-- ✅ FORM ENDS HERE -->
+
+                <div class="text-center mt-8">
+                    <a href="{{ url_for('rhyme.notes') }}" class="inline-flex items-center text-white/90 hover:text-white transition-colors duration-300">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                        </svg>
+                        Back to Notes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.6s ease-out forwards;
+        }
+    </style>
+</body>
+</html>
